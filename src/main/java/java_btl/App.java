@@ -4,11 +4,13 @@ import java.io.IOException;
 import java.util.ArrayList;
 
 import javafx.animation.ParallelTransition;
+import javafx.animation.PauseTransition;
+import javafx.animation.SequentialTransition;
 import javafx.application.Application;
-import javafx.fxml.FXMLLoader;
-import javafx.scene.Parent;
+import javafx.scene.Group;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
+import javafx.util.Duration;
 
 /**
  * JavaFX App
@@ -25,22 +27,21 @@ public class App extends Application {
         ArrayList<Integer> init = new ArrayList<Integer>();
         for (Integer i=1;i<8;i++)
         init.add(i);
+        init.add(2);
         mainArray hb = new mainArray(init); 
-        ArrayGroup gp = hb.render(screenHeight, screenWidth);
-        ParallelTransition ts = gp.swapTransition(0, 5);
-        ts.play();
+        hb.setWindowSize(screenWidth, screenHeight);
+        hb.render();
+        Group gp = hb.renderedArray;
+        ParallelTransition ts = hb.swap(5, 0);
+        ParallelTransition ts2 = hb.swap(0, 3);
+        PauseTransition pts = new PauseTransition(Duration.millis(100));
+        SequentialTransition sq =new SequentialTransition(ts,pts);
+        sq.play();
+        sq.getChildren().add(ts2);
         scene = new Scene(gp, screenWidth, screenHeight);
         stage.setScene(scene);
         stage.show();
-    }
-
-    static void setRoot(String fxml) throws IOException {
-        scene.setRoot(loadFXML(fxml));
-    }
-
-    private static Parent loadFXML(String fxml) throws IOException {
-        FXMLLoader fxmlLoader = new FXMLLoader(App.class.getResource(fxml + ".fxml"));
-        return fxmlLoader.load();
+        
     }
 
     public static void main(String[] args) {
