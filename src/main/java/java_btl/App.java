@@ -4,13 +4,10 @@ import java.io.IOException;
 import java.util.ArrayList;
 
 import javafx.animation.ParallelTransition;
-import javafx.animation.PauseTransition;
-import javafx.animation.SequentialTransition;
 import javafx.application.Application;
 import javafx.scene.Group;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
-import javafx.util.Duration;
 
 /**
  * JavaFX App
@@ -18,30 +15,33 @@ import javafx.util.Duration;
 public class App extends Application {
 
     private static Scene scene;
-    private double screenHeight,screenWidth;
-    
+    private double screenHeight, screenWidth;
+
     @Override
     public void start(Stage stage) throws IOException {
-        this.screenHeight=768.0;
-        this.screenWidth=1024.0;
+        this.screenHeight = 768.0;
+        this.screenWidth = 1024.0;
         ArrayList<Integer> init = new ArrayList<Integer>();
-        for (Integer i=1;i<8;i++)
-        init.add(i);
-        init.add(2);
-        mainArray hb = new mainArray(init); 
-        hb.setWindowSize(screenWidth, screenHeight);
-        hb.render();
-        Group gp = hb.renderedArray;
-        ParallelTransition ts = hb.swap(5, 0);
-        ParallelTransition ts2 = hb.swap(0, 3);
-        PauseTransition pts = new PauseTransition(Duration.millis(100));
-        SequentialTransition sq =new SequentialTransition(ts,pts);
-        sq.play();
-        sq.getChildren().add(ts2);
+        for (Integer i = 0; i < 8; i++)
+            init.add(i);
+        MainArray mainArray = new MainArray(init);
+        mainArray.setWindowSize(screenWidth, screenHeight);
+        mainArray.render();
+        ParallelTransition ts1 = mainArray.swap(0, 5);
+        ParallelTransition ts2 = mainArray.swap(0, 3);
+        ParallelTransition ts3 = mainArray.swap(0, 6);
+        ParallelTransition ts4 = mainArray.swap(0, 4);
+        AnimationQueue newQueue = new AnimationQueue();
+        newQueue.add(ts1);
+        newQueue.add(ts2);
+        newQueue.add(ts3);
+        newQueue.add(ts4);
+        newQueue.setCompleted(false);
+        newQueue.playQueue();
+        Group gp = mainArray.renderedArray;
         scene = new Scene(gp, screenWidth, screenHeight);
         stage.setScene(scene);
         stage.show();
-        
     }
 
     public static void main(String[] args) {
