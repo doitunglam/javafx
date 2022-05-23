@@ -24,24 +24,40 @@ public class App extends Application {
         this.screenWidth = 1024.0;
         ArrayList<Integer> init = new ArrayList<Integer>();
         Random rand = new Random();
-        for (Integer i = 0; i < 8; i++)
-            init.add(rand.nextInt(50));
+        for (Integer i = 0; i < 15; i++)
+            init.add(rand.nextInt(100));
         MainArray mainArray = new MainArray(init);
         mainArray.setWindowSize(screenWidth, screenHeight);
         mainArray.render();
         AnimationQueue newQueue = new AnimationQueue();
-        for (int i = 0; i < 8; i++)
-            for (int j = i + 1; j < 8; j++) {
-                if (mainArray.get(i).getKey()<mainArray.get(j).getKey())
-                newQueue.add(mainArray.swap(i, j));
+        newQueue.add(mainArray.moveIndicatorTo(mainArray.primaryIndicator, 0));
+        for (int i = 0; i < 14; i++) {
+            if (i == 0)
+                newQueue.add(mainArray.primaryIndicator.makeAppear());
+            else
+                newQueue.add(mainArray.moveIndicatorTo(mainArray.primaryIndicator, i));
+            newQueue.add(mainArray.moveIndicatorTo(mainArray.secondaryIndicator, i+1));
+            for (int j = i + 1; j < 15; j++) {
+                if (j == i + 1)
+                    newQueue.add(mainArray.secondaryIndicator.makeAppear());
+                else
+                    newQueue.add(mainArray.moveIndicatorTo(mainArray.secondaryIndicator, j));
+                if (mainArray.get(i).getKey() < mainArray.get(j).getKey())
+                    newQueue.add(mainArray.swap(i, j));
             }
+            newQueue.add(mainArray.secondaryIndicator.makeDisappear());
+        }
+        newQueue.add(mainArray.primaryIndicator.makeDisappear());
         newQueue.setCompleted(true);
         Button newButton = new Button();
         newButton.setText("Start");
-        newButton.setOnMouseClicked(Event -> {newQueue.playQueue();});
+        newButton.setOnMouseClicked(Event -> {
+            newQueue.playQueue();
+        });
         AnchorPane ap = new AnchorPane();
         ap.getChildren().add(newButton);
         ap.getChildren().add(mainArray.renderedArray);
+        ap.getChildren().addAll(mainArray.primaryIndicator, mainArray.secondaryIndicator);
         scene = new Scene(ap, screenWidth, screenHeight);
         stage.setScene(scene);
         stage.show();
