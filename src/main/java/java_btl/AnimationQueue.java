@@ -30,7 +30,7 @@ public class AnimationQueue extends LinkedList<ParallelTransition> {
             if (this.isCompleted == false) {
                 this.waitCount = this.waitCount + 1;
                 if (waitCount < 5) {
-                    PauseTransition wait = new PauseTransition(Duration.millis(50));
+                    PauseTransition wait = new PauseTransition(Duration.millis(500));
                     wait.play();
                     playQueue();
                 } else {

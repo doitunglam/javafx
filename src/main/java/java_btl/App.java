@@ -2,11 +2,12 @@ package java_btl;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Random;
 
-import javafx.animation.ParallelTransition;
 import javafx.application.Application;
-import javafx.scene.Group;
 import javafx.scene.Scene;
+import javafx.scene.control.Button;
+import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 
 /**
@@ -22,24 +23,26 @@ public class App extends Application {
         this.screenHeight = 768.0;
         this.screenWidth = 1024.0;
         ArrayList<Integer> init = new ArrayList<Integer>();
+        Random rand = new Random();
         for (Integer i = 0; i < 8; i++)
-            init.add(i);
+            init.add(rand.nextInt(50));
         MainArray mainArray = new MainArray(init);
         mainArray.setWindowSize(screenWidth, screenHeight);
         mainArray.render();
-        ParallelTransition ts1 = mainArray.swap(0, 5);
-        ParallelTransition ts2 = mainArray.swap(0, 3);
-        ParallelTransition ts3 = mainArray.swap(0, 6);
-        ParallelTransition ts4 = mainArray.swap(0, 4);
         AnimationQueue newQueue = new AnimationQueue();
-        newQueue.add(ts1);
-        newQueue.add(ts2);
-        newQueue.add(ts3);
-        newQueue.add(ts4);
-        newQueue.setCompleted(false);
-        newQueue.playQueue();
-        Group gp = mainArray.renderedArray;
-        scene = new Scene(gp, screenWidth, screenHeight);
+        for (int i = 0; i < 8; i++)
+            for (int j = i + 1; j < 8; j++) {
+                if (mainArray.get(i).getKey()<mainArray.get(j).getKey())
+                newQueue.add(mainArray.swap(i, j));
+            }
+        newQueue.setCompleted(true);
+        Button newButton = new Button();
+        newButton.setText("Start");
+        newButton.setOnMouseClicked(Event -> {newQueue.playQueue();});
+        AnchorPane ap = new AnchorPane();
+        ap.getChildren().add(newButton);
+        ap.getChildren().add(mainArray.renderedArray);
+        scene = new Scene(ap, screenWidth, screenHeight);
         stage.setScene(scene);
         stage.show();
     }
