@@ -49,14 +49,14 @@ public class Indicator extends Polygon {
         ts.setByX(xCoor - this.xCoor);
         ts.setByY(yCoor - this.yCoor);
         ts.setAutoReverse(false);
-        ts.setDuration(Duration.millis(500));
+        ts.setDuration(Duration.millis(300));
         ts.setCycleCount(1);
         ts.setNode(this);
         this.xCoor = xCoor;
         this.yCoor = yCoor;
         return new ParallelTransition(ts);
     }
-
+    //hoat hoa 
     public ParallelTransition makeAppear() {
         SequentialTransition sq = new SequentialTransition();
         TranslateTransition ts = new TranslateTransition();

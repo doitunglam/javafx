@@ -1,6 +1,7 @@
 package java_btl;
 
 import java.util.LinkedList;
+import java.util.concurrent.Semaphore;
 
 import javafx.animation.ParallelTransition;
 import javafx.animation.PauseTransition;
@@ -9,19 +10,23 @@ import javafx.util.Duration;
 public class AnimationQueue extends LinkedList<ParallelTransition> {
     private boolean isCompleted;
     private int waitCount;
+    private Semaphore isInterruped;
 
     public AnimationQueue() {
         super();
         isCompleted = false;
         waitCount = 0;
+        isInterruped = new Semaphore(0);
     }
 
-    // Backend thread side
     public void setCompleted(boolean isCompleted) {
         this.isCompleted = isCompleted;
     }
 
     public void playQueue() {
+        if (this.isInterruped.tryAcquire() == false)
+            return;
+        this.isInterruped.release();
         if (this.isEmpty() == true) {
             if (this.isCompleted == true) {
                 System.out.println("Animation played successfully.");
@@ -47,5 +52,18 @@ public class AnimationQueue extends LinkedList<ParallelTransition> {
             });
             currentAnimationNode.play();
         }
+    }
+
+    public void setInterupted() {
+        try {
+            this.isInterruped.acquire();
+        } catch (InterruptedException e) {
+            setInterupted();
+        }
+    }
+
+    public void resetInteruputed(){
+        this.isInterruped.release();
+        playQueue();
     }
 }

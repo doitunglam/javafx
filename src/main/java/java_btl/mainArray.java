@@ -18,9 +18,9 @@ public class MainArray extends ArrayList<ArrayNode> {
 
     public MainArray(ArrayList<Integer> src) {
         this.offset = 60.0;
-        this.primaryIndicator = new Indicator(0.8*this.offset);
+        this.primaryIndicator = new Indicator(0.8 * this.offset);
         this.primaryIndicator.setFill(Color.AQUA);
-        this.secondaryIndicator = new Indicator(0.8*this.offset);
+        this.secondaryIndicator = new Indicator(0.8 * this.offset);
         this.secondaryIndicator.setFill(Color.RED);
         this.groupIndexMask = new ArrayList<Integer>();
         for (int i = 0; i < src.size(); i++) {
@@ -31,7 +31,7 @@ public class MainArray extends ArrayList<ArrayNode> {
     }
 
     public ParallelTransition moveIndicatorTo(Indicator indicator, int tar) {
-        return indicator.moveTo(this.get(tar).getxCoor(), this.get(tar).getyCoor()+0.55*this.offset);
+        return indicator.moveTo(this.get(tar).getxCoor(), this.get(tar).getyCoor() + 0.55 * this.offset);
     }
 
     public void setWindowSize(double windowWidth, double windowHeight) {

@@ -42,6 +42,7 @@ public class ArrayNode {
         this.xCoor = 0;
         this.yCoor = 0;
     }
+    //Javafx 
     public Group render() {
         Text text = new Text(Integer.toString(this.key));
         text.setX(this.xCoor);
