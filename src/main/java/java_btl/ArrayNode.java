@@ -44,6 +44,8 @@ public class ArrayNode {
     }
     //Javafx 
     public Group render() {
+
+        //dark magic
         Text text = new Text(Integer.toString(this.key));
         text.setX(this.xCoor);
         text.setY(this.yCoor);

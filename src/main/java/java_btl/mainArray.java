@@ -4,9 +4,12 @@ import java.util.ArrayList;
 import java.util.Collections;
 
 import javafx.animation.ParallelTransition;
-import javafx.animation.TranslateTransition;
+import javafx.animation.PathTransition;
 import javafx.scene.Group;
 import javafx.scene.paint.Color;
+import javafx.scene.shape.CubicCurveTo;
+import javafx.scene.shape.MoveTo;
+import javafx.scene.shape.Path;
 import javafx.util.Duration;
 
 public class MainArray extends ArrayList<ArrayNode> {
@@ -55,24 +58,52 @@ public class MainArray extends ArrayList<ArrayNode> {
         this.renderedArray = gp;
     }
 
+    // dao vi tri index1 va index2
     public ParallelTransition swap(int index1, int index2) {
-        double xOffset = this.get(index2).getxCoor() - this.get(index1).getxCoor();
-        double yOffset = this.get(index2).getyCoor() - this.get(index1).getyCoor();
-        TranslateTransition ts1 = new TranslateTransition();
-        ts1.setNode(renderedArray.getChildren().get(this.groupIndexMask.get(index1)));
-        ts1.setByX(xOffset);
-        ts1.setByY(yOffset);
-        ts1.setAutoReverse(false);
-        ts1.setDuration(Duration.millis(600));
-        ts1.setCycleCount(1);
-        TranslateTransition ts2 = new TranslateTransition();
-        ts2.setNode(renderedArray.getChildren().get(this.groupIndexMask.get(index2)));
-        ts2.setByX(-xOffset);
-        ts2.setByY(-yOffset);
-        ts2.setAutoReverse(false);
-        ts2.setDuration(Duration.millis(600));
-        ts2.setCycleCount(1);
-        ParallelTransition prlts = new ParallelTransition(ts1, ts2);
+        double xCoor1 = this.get(index1).getxCoor();
+        double yCoor1 = this.get(index1).getyCoor();
+        double xCoor2 = this.get(index2).getxCoor();
+        double yCoor2 = this.get(index2).getyCoor();
+
+        Path path1 = new Path();
+
+        CubicCurveTo cubicTo1 = new CubicCurveTo();
+        cubicTo1.setControlX1((xCoor1 + xCoor2)/2);
+        cubicTo1.setControlY1(200);
+        cubicTo1.setControlX2((xCoor1 + xCoor2)/2);
+        cubicTo1.setControlY2(200);
+        cubicTo1.setX(xCoor1);
+        cubicTo1.setY(yCoor1);
+        path1.getElements().add(new MoveTo(xCoor2, yCoor2));
+        path1.getElements().add(cubicTo1);
+
+        Path path2 = new Path();
+
+        CubicCurveTo cubicTo2 = new CubicCurveTo();
+        cubicTo2.setControlX1((xCoor1 + xCoor2)/2);
+        cubicTo2.setControlY1(200);
+        cubicTo2.setControlX2((xCoor1 + xCoor2)/2);
+        cubicTo2.setControlY2(200);
+        cubicTo2.setX(xCoor2);
+        cubicTo2.setY(yCoor2);
+        path2.getElements().add(new MoveTo(xCoor1, yCoor1));
+        path2.getElements().add(cubicTo2);
+
+        PathTransition pt1 = new PathTransition();
+        pt1.setNode(renderedArray.getChildren().get(this.groupIndexMask.get(index1)));
+        pt1.setPath(path2);
+        pt1.setAutoReverse(false);
+        pt1.setDuration(Duration.millis(600));
+        pt1.setCycleCount(1);
+
+        PathTransition pt2 = new PathTransition();
+        pt2.setNode(renderedArray.getChildren().get(this.groupIndexMask.get(index2)));
+        pt2.setPath(path1);
+        pt2.setAutoReverse(false);
+        pt2.setDuration(Duration.millis(600));
+        pt2.setCycleCount(1);
+
+        ParallelTransition prlts = new ParallelTransition(pt1, pt2);
         int tmp = this.get(index1).getKey();
         this.get(index1).setKey(this.get(index2).getKey());
         this.get(index2).setKey(tmp);
