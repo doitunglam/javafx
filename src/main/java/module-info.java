@@ -1,6 +1,7 @@
 module java_btl {
-    requires javafx.controls;
     requires transitive javafx.graphics;
+    requires transitive javafx.controls;
+    //requires javafx.controls;
     requires javafx.fxml;
 
     opens java_btl to javafx.fxml;
