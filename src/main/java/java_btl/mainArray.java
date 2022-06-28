@@ -110,4 +110,7 @@ public class MainArray extends ArrayList<ArrayNode> {
         Collections.swap(this.groupIndexMask, index1, index2);
         return prlts;
     }
+    public int  getSize(){
+     return groupIndexMask.size();
+    }
 }

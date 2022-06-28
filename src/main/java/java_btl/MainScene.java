@@ -10,15 +10,15 @@ import javafx.scene.layout.FlowPane;
 
 public class MainScene extends Scene {
 
-    private MainArray mainArray;
-    private AnimationQueue animationQueue;
-
+    public static MainArray mainArray;
+    public AnimationQueue animationQueue;
+    
     public MainScene(Parent arg0, double arg1, double arg2) {
         super(arg0, arg1, arg2);
         animationQueue = new AnimationQueue();
     }
 
-    public MainArray getMainArray() {
+    public static MainArray getMainArray() {
         return mainArray;
     }
 
@@ -72,24 +72,63 @@ public class MainScene extends Scene {
     }
 
     public void setAnimationQueue() {
+        // animationQueue.add(mainArray.moveIndicatorTo(mainArray.primaryIndicator, 0));
+        // for (int i = 0; i < 14; i++) {
+        //     if (i == 0)
+        //         animationQueue.add(mainArray.primaryIndicator.makeAppear());
+        //     else
+        //         animationQueue.add(mainArray.moveIndicatorTo(mainArray.primaryIndicator, i));
+        //     animationQueue.add(mainArray.moveIndicatorTo(mainArray.secondaryIndicator, i + 1));
+        //     for (int j = i + 1; j < 15; j++) {
+        //         if (j == i + 1)
+        //             animationQueue.add(mainArray.secondaryIndicator.makeAppear());
+        //         else
+        //             animationQueue.add(mainArray.moveIndicatorTo(mainArray.secondaryIndicator, j));
+        //         if (mainArray.get(i).getKey() < mainArray.get(j).getKey())
+        //             animationQueue.add(mainArray.swap(i, j));
+        //     }
+        //     animationQueue.add(mainArray.secondaryIndicator.makeDisappear());
+        // }
+        // animationQueue.add(mainArray.primaryIndicator.makeDisappear());
+        // animationQueue.setCompleted(true);
         animationQueue.add(mainArray.moveIndicatorTo(mainArray.primaryIndicator, 0));
-        for (int i = 0; i < 14; i++) {
-            if (i == 0)
+        animationQueue.add(mainArray.moveIndicatorTo(mainArray.secondaryIndicator, 1));
+        int swapped = 0;
+        do{
+            swapped = 0;
+        for(int i=0;i<mainArray.getSize()-1;i++){
+            if(i==0){
                 animationQueue.add(mainArray.primaryIndicator.makeAppear());
-            else
-                animationQueue.add(mainArray.moveIndicatorTo(mainArray.primaryIndicator, i));
-            animationQueue.add(mainArray.moveIndicatorTo(mainArray.secondaryIndicator, i + 1));
-            for (int j = i + 1; j < 15; j++) {
-                if (j == i + 1)
-                    animationQueue.add(mainArray.secondaryIndicator.makeAppear());
-                else
-                    animationQueue.add(mainArray.moveIndicatorTo(mainArray.secondaryIndicator, j));
-                if (mainArray.get(i).getKey() < mainArray.get(j).getKey())
-                    animationQueue.add(mainArray.swap(i, j));
+                animationQueue.add(mainArray.secondaryIndicator.makeAppear());
             }
-            animationQueue.add(mainArray.secondaryIndicator.makeDisappear());
+            else{
+                 animationQueue.add(mainArray.moveIndicatorTo(mainArray.primaryIndicator, i));
+                animationQueue.add(mainArray.moveIndicatorTo(mainArray.secondaryIndicator, i+1));
+            }
+            if(mainArray.get(i).getKey() > mainArray.get(i+1).getKey()){
+                  animationQueue.add(mainArray.moveIndicatorTo(mainArray.primaryIndicator, i));
+                  animationQueue.add(mainArray.moveIndicatorTo(mainArray.secondaryIndicator, i+1));
+                  animationQueue.add(mainArray.secondaryIndicator.makeAppear());
+                  animationQueue.add(mainArray.swap(i, i+1));
+                  swapped = 1;
+            }
         }
         animationQueue.add(mainArray.primaryIndicator.makeDisappear());
+        animationQueue.add(mainArray.secondaryIndicator.makeDisappear());
+    } while(swapped == 1);
         animationQueue.setCompleted(true);
     }
+    // public void quickSort(){
+    //     animationQueue.add(mainArray.moveIndicatorTo(mainArray.primaryIndicator, 0));
+
+    // }
+
+    public void setAnimationQueue(AnimationQueue animationQueue){
+        this.animationQueue = animationQueue;
+    }
+    public void playAnimation(){
+        animationQueue.resetInteruputed();
+    }
+    
+
 }
