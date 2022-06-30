@@ -1,9 +1,6 @@
 package java_btl;
 
-import java.util.ArrayList;
-
 import javafx.scene.Group;
-import javafx.scene.Parent;
 import javafx.scene.control.TextField;
 
 public class Sorting {

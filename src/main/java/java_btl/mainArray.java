@@ -20,7 +20,7 @@ public class MainArray extends ArrayList<ArrayNode> {
     private Double offset;
 
     public MainArray(ArrayList<Integer> src) {
-        this.offset = 60.0;
+        this.offset = OptionContainer.nodeRadius*2;
         this.primaryIndicator = new Indicator(0.8 * this.offset);
         this.primaryIndicator.setFill(Color.AQUA);
         this.secondaryIndicator = new Indicator(0.8 * this.offset);
@@ -34,7 +34,7 @@ public class MainArray extends ArrayList<ArrayNode> {
     }
 
     public ParallelTransition moveIndicatorTo(Indicator indicator, int tar) {
-        return indicator.moveTo(this.get(tar).getxCoor(), this.get(tar).getyCoor() + 0.55 * this.offset);
+        return indicator.moveTo(this.get(tar).getxCoor(), this.get(tar).getyCoor() + OptionContainer.indicatorSizeRatio * this.offset);
     }
 
     public void setWindowSize(double windowWidth, double windowHeight) {
@@ -46,7 +46,7 @@ public class MainArray extends ArrayList<ArrayNode> {
     public void render() {
         double centerX = this.windowWidth / 2;
         double centerY = this.windowHeight / 2;
-        this.offset = 60.0;
+        this.offset = OptionContainer.nodeRadius*2;
         Group gp = new Group();
         double offsetBias = this.size() / 2.0 - 0.5;
         for (int i = 0; i < this.size(); i++) {
@@ -81,9 +81,9 @@ public class MainArray extends ArrayList<ArrayNode> {
 
         CubicCurveTo cubicTo2 = new CubicCurveTo();
         cubicTo2.setControlX1((xCoor1 + xCoor2)/2);
-        cubicTo2.setControlY1(200);
+        cubicTo2.setControlY1(OptionContainer.curveCeil);
         cubicTo2.setControlX2((xCoor1 + xCoor2)/2);
-        cubicTo2.setControlY2(200);
+        cubicTo2.setControlY2(OptionContainer.curveCeil);
         cubicTo2.setX(xCoor2);
         cubicTo2.setY(yCoor2);
         path2.getElements().add(new MoveTo(xCoor1, yCoor1));
@@ -93,14 +93,14 @@ public class MainArray extends ArrayList<ArrayNode> {
         pt1.setNode(renderedArray.getChildren().get(this.groupIndexMask.get(index1)));
         pt1.setPath(path2);
         pt1.setAutoReverse(false);
-        pt1.setDuration(Duration.millis(600));
+        pt1.setDuration(Duration.millis(OptionContainer.animationDuration));
         pt1.setCycleCount(1);
 
         PathTransition pt2 = new PathTransition();
         pt2.setNode(renderedArray.getChildren().get(this.groupIndexMask.get(index2)));
         pt2.setPath(path1);
         pt2.setAutoReverse(false);
-        pt2.setDuration(Duration.millis(600));
+        pt2.setDuration(Duration.millis(OptionContainer.animationDuration));
         pt2.setCycleCount(1);
 
         ParallelTransition prlts = new ParallelTransition(pt1, pt2);

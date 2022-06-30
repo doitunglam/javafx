@@ -49,14 +49,14 @@ public class ArrayNode {
         Text text = new Text(Integer.toString(this.key));
         text.setX(this.xCoor);
         text.setY(this.yCoor);
-        text.setFont(Font.font("Arial", 24));
+        text.setFont(Font.font("Arial", 0.8*OptionContainer.nodeRadius));
         double width = text.prefWidth(-1);
         text.setX(this.xCoor - width / 2);
         text.setTextOrigin(VPos.CENTER);        
         Circle circle = new Circle();
         circle.setCenterX(this.xCoor);
         circle.setCenterY(this.yCoor);
-        circle.setRadius(30);
+        circle.setRadius(OptionContainer.nodeRadius);
         circle.setFill(Color.RED);
         Group newGroup = new Group();
         ObservableList<Node> list = newGroup.getChildren();
