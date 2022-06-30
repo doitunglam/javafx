@@ -7,7 +7,7 @@ import javafx.animation.ParallelTransition;
 import javafx.animation.PauseTransition;
 import javafx.util.Duration;
 
-public class AnimationQueue extends LinkedList<ParallelTransition> {
+public class AnimationQueue extends LinkedList<Animation> {
     private boolean isCompleted;
     private int waitCount;
     private Semaphore isInterruped;
@@ -46,7 +46,7 @@ public class AnimationQueue extends LinkedList<ParallelTransition> {
             }
         }
         if (this.isEmpty() == false) {
-            ParallelTransition currentAnimationNode = this.pop();
+            ParallelTransition currentAnimationNode = this.pop().getAnimation();
             currentAnimationNode.setOnFinished(Event -> {
                 playQueue();
             });
