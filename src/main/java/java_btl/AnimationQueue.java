@@ -66,4 +66,5 @@ public class AnimationQueue extends LinkedList<ParallelTransition> {
         this.isInterruped.release();
         playQueue();
     }
+    
 }

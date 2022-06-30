@@ -23,9 +23,19 @@ public class App extends Application {
 
         MainScene mainScene = new MainScene(new Group(),1024,728);
         MainArray mainArray = new MainArray(init);
+        
         mainScene.setMainArray(mainArray);
+       
         mainScene.render();
-        mainScene.setAnimationQueue();
+        Sorting sorting = new Sorting();
+        sorting.quickSort(mainScene.animationQueue, MainScene.mainArray, 0, init.size()-1);
+        // mainScene.setAnimationQueue();
+        // MainScene.Sorting sorting = mainScene.new Sorting();
+        // sorting.bubleSort();
+        // Sorting sorting = new Sorting();
+        // mainScene.setAnimationQueue(sorting.bubleSort(mainArray));
+        // mainScene.playAnimation();
+        
         stage.setScene(mainScene);
         stage.setTitle("Demo Sorting");
         stage.show();

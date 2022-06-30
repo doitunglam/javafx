@@ -12,8 +12,9 @@ import javafx.scene.layout.FlowPane;
 
 public class MainScene extends Scene {
 
-    private MainArray mainArray;
-    private AnimationQueue animationQueue;
+    public static MainArray mainArray;
+    public AnimationQueue animationQueue;
+    
     public TextArea textIndicator = new TextArea(); 
 
     public MainScene(Parent arg0, double arg1, double arg2) {
@@ -22,7 +23,7 @@ public class MainScene extends Scene {
         animationQueue = new AnimationQueue();
     }
 
-    public MainArray getMainArray() {
+    public static MainArray getMainArray() {
         return mainArray;
     }
 
@@ -31,7 +32,7 @@ public class MainScene extends Scene {
     }
 
     public void setMainArray(MainArray mainArray) {
-        this.mainArray = mainArray;
+        MainScene.mainArray = mainArray;
     }
 
     public void render() {
@@ -82,25 +83,13 @@ public class MainScene extends Scene {
         this.setRoot(bp);
     }
 
-    public void setAnimationQueue() {
-        animationQueue.add(mainArray.moveIndicatorTo(mainArray.primaryIndicator, 0));
-        for (int i = 0; i < 14; i++) {
-            if (i == 0)
-                animationQueue.add(mainArray.primaryIndicator.makeAppear());
-            else
-                animationQueue.add(mainArray.moveIndicatorTo(mainArray.primaryIndicator, i));
-            animationQueue.add(mainArray.moveIndicatorTo(mainArray.secondaryIndicator, i + 1));
-            for (int j = i + 1; j < 15; j++) {
-                if (j == i + 1)
-                    animationQueue.add(mainArray.secondaryIndicator.makeAppear());
-                else
-                    animationQueue.add(mainArray.moveIndicatorTo(mainArray.secondaryIndicator, j));
-                if (mainArray.get(i).getKey() < mainArray.get(j).getKey())
-                    animationQueue.add(mainArray.swap(i, j));
-            }
-            animationQueue.add(mainArray.secondaryIndicator.makeDisappear());
-        }
-        animationQueue.add(mainArray.primaryIndicator.makeDisappear());
-        animationQueue.setCompleted(true);
+
+    public void setAnimationQueue(AnimationQueue animationQueue){
+        this.animationQueue = animationQueue;
     }
+    public void playAnimation(){
+        animationQueue.resetInteruputed();
+    }
+    
+
 }
