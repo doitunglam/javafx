@@ -19,7 +19,7 @@ public class MainArray extends ArrayList<ArrayNode> {
     public Indicator primaryIndicator, secondaryIndicator;
     private Double offset;
 
-    public MainArray(ArrayList<Integer> src) {
+    public MainArray (ArrayList<Integer> src) {
         this.offset = 60.0;
         this.primaryIndicator = new Indicator(0.8 * this.offset);
         this.primaryIndicator.setFill(Color.AQUA);
