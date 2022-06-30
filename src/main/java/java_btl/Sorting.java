@@ -1,6 +1,9 @@
 package java_btl;
 
+//import java.util.ArrayList;
+
 import javafx.scene.Group;
+//import javafx.scene.Parent;
 import javafx.scene.control.TextField;
 
 public class Sorting {
@@ -14,18 +17,18 @@ public class Sorting {
      TextField textField2 = new TextField("R = ");
      TextField textField3 = new TextField("Pivot = ");
      Group group = new Group(textField1,textField2,textField3);
-     mainScene = new MainScene(group, 1024 ,768 );
+     mainScene = new MainScene(group, 1024 ,500 );
     }
 
     public Sorting(){
-        
+
     }
 
     // public void setMainArray(ArrayList<Integer> src){
     // mainArray = new MainArray(src);
     // }
 
-    public void bubleSort(AnimationQueue animationQueue, MainArray mainArray) {
+    public void bubbleSort(AnimationQueue animationQueue, MainArray mainArray) {
         animationQueue.add(mainArray.moveIndicatorTo(mainArray.primaryIndicator, 0));
         animationQueue.add(mainArray.moveIndicatorTo(mainArray.secondaryIndicator, 1));
         int swapped = 0;
@@ -51,7 +54,7 @@ public class Sorting {
             animationQueue.add(mainArray.secondaryIndicator.makeDisappear());
         } while (swapped == 1);
         animationQueue.setCompleted(true);
-        // return animationQueue;
+        //return animationQueue;
     }
 
 
