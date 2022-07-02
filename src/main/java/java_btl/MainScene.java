@@ -1,20 +1,30 @@
 package java_btl;
+//from me with love <3
 
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.control.TextArea;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.FlowPane;
 
 public class MainScene extends Scene {
 
+
     public static MainArray mainArray;
     public AnimationQueue animationQueue;
     
+
+    // private MainArray mainArray;
+    // private AnimationQueue animationQueue;
+    public TextArea textIndicator = new TextArea(); 
+
+
     public MainScene(Parent arg0, double arg1, double arg2) {
         super(arg0, arg1, arg2);
+        textIndicator = new TextArea();
         animationQueue = new AnimationQueue();
     }
 
@@ -65,7 +75,14 @@ public class MainScene extends Scene {
 
         BorderPane bp = new BorderPane();
         bp.setBottom(fp);
-        bp.setPadding(new Insets(100));
+        fp.setPadding(new Insets(100));
+        
+        textIndicator.setMaxWidth(200);
+        textIndicator.setMaxHeight(50);
+        textIndicator.setEditable(false);
+        textIndicator.setOnMouseClicked(Event ->{});
+        BorderPane.setAlignment(textIndicator, Pos.BOTTOM_RIGHT);
+        bp.setTop(textIndicator);
         bp.getChildren().add(mainArray.renderedArray);
         bp.getChildren().addAll(mainArray.primaryIndicator, mainArray.secondaryIndicator);
         this.setRoot(bp);

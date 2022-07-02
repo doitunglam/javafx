@@ -29,7 +29,8 @@ public class App extends Application {
         mainScene.render();
         Sorting sorting = new Sorting();
         // sorting.setMainArray(init);
-        sorting.quickSort(mainScene.animationQueue, mainScene.mainArray, 0, init.size()-1);
+        // sorting.quickSort(mainScene.animationQueue,mainScene.mainArray, 0, mainArray.getSize()-1);
+        sorting.quickSort(mainScene.animationQueue,mainScene.mainArray, 0, mainArray.getSize()-1);
         // mainScene.setAnimationQueue();
         // MainScene.Sorting sorting = mainScene.new Sorting();
         // sorting.bubleSort();

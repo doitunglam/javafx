@@ -35,16 +35,17 @@ public class Sorting {
         do {
             swapped = 0;
             for (int i = 0; i < mainArray.getSize() - 1; i++) {
-                if (i == 0) {
-                    animationQueue.add(mainArray.primaryIndicator.makeAppear());
-                    animationQueue.add(mainArray.secondaryIndicator.makeAppear());
-                } else {
-                    animationQueue.add(mainArray.moveIndicatorTo(mainArray.primaryIndicator, i));
-                    animationQueue.add(mainArray.moveIndicatorTo(mainArray.secondaryIndicator, i + 1));
-                }
+                // if (i == 0) {
+                //     animationQueue.add(mainArray.primaryIndicator.makeAppear());
+                //     animationQueue.add(mainArray.secondaryIndicator.makeAppear());
+                // } else {
+                //     animationQueue.add(mainArray.moveIndicatorTo(mainArray.primaryIndicator, i));
+                //     animationQueue.add(mainArray.moveIndicatorTo(mainArray.secondaryIndicator, i + 1));
+                // }
                 if (mainArray.get(i).getKey() > mainArray.get(i + 1).getKey()) {
                     animationQueue.add(mainArray.moveIndicatorTo(mainArray.primaryIndicator, i));
                     animationQueue.add(mainArray.moveIndicatorTo(mainArray.secondaryIndicator, i + 1));
+                    animationQueue.add(mainArray.primaryIndicator.makeAppear());
                     animationQueue.add(mainArray.secondaryIndicator.makeAppear());
                     animationQueue.add(mainArray.swap(i, i + 1));
                     swapped = 1;
@@ -74,8 +75,8 @@ public class Sorting {
         int pivot = mainArray.get(indexPivot).getKey();
         animationQueue.add(mainArray.moveIndicatorTo(mainArray.primaryIndicator, indexPivot));
         animationQueue.add(mainArray.moveIndicatorTo(mainArray.secondaryIndicator, R));
-        animationQueue.add(mainArray.primaryIndicator.makeAppear());
-        animationQueue.add(mainArray.secondaryIndicator.makeAppear());
+        // animationQueue.add(mainArray.primaryIndicator.makeAppear());
+        // animationQueue.add(mainArray.secondaryIndicator.makeAppear());
         animationQueue.add(mainArray.swap(indexPivot, R));
         // swap(A[indexPivot], A[R]);
         int storeIndex = L;
@@ -87,6 +88,8 @@ public class Sorting {
                 // A[i] = tmp;
                 animationQueue.add(mainArray.moveIndicatorTo(mainArray.primaryIndicator, storeIndex));
                 animationQueue.add(mainArray.moveIndicatorTo(mainArray.secondaryIndicator, i));
+                animationQueue.add(mainArray.primaryIndicator.makeAppear());
+                animationQueue.add(mainArray.secondaryIndicator.makeAppear());
                 animationQueue.add(mainArray.swap(storeIndex, i));
                 storeIndex++;
             }
