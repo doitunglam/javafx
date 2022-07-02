@@ -16,15 +16,17 @@ public class MainArray extends ArrayList<ArrayNode> {
     public Group renderedArray;
     private double windowWidth, windowHeight;
     private ArrayList<Integer> groupIndexMask;
-    public Indicator primaryIndicator, secondaryIndicator;
+    public Indicator primaryIndicator, secondaryIndicator, pivotIndicator;
     private Double offset;
 
-    public MainArray (ArrayList<Integer> src) {
+    public MainArray(ArrayList<Integer> src) {
         this.offset = 60.0;
         this.primaryIndicator = new Indicator(0.8 * this.offset);
         this.primaryIndicator.setFill(Color.AQUA);
         this.secondaryIndicator = new Indicator(0.8 * this.offset);
         this.secondaryIndicator.setFill(Color.RED);
+        this.pivotIndicator = new Indicator(0.8 * this.offset);
+        this.pivotIndicator.setFill(Color.BLACK);
         this.groupIndexMask = new ArrayList<Integer>();
         for (int i = 0; i < src.size(); i++) {
             this.add(new ArrayNode(src.get(i)));
@@ -68,9 +70,9 @@ public class MainArray extends ArrayList<ArrayNode> {
         Path path1 = new Path();
 
         CubicCurveTo cubicTo1 = new CubicCurveTo();
-        cubicTo1.setControlX1((xCoor1 + xCoor2)/2);
+        cubicTo1.setControlX1((xCoor1 + xCoor2) / 2);
         cubicTo1.setControlY1(200);
-        cubicTo1.setControlX2((xCoor1 + xCoor2)/2);
+        cubicTo1.setControlX2((xCoor1 + xCoor2) / 2);
         cubicTo1.setControlY2(200);
         cubicTo1.setX(xCoor1);
         cubicTo1.setY(yCoor1);
@@ -80,9 +82,9 @@ public class MainArray extends ArrayList<ArrayNode> {
         Path path2 = new Path();
 
         CubicCurveTo cubicTo2 = new CubicCurveTo();
-        cubicTo2.setControlX1((xCoor1 + xCoor2)/2);
+        cubicTo2.setControlX1((xCoor1 + xCoor2) / 2);
         cubicTo2.setControlY1(200);
-        cubicTo2.setControlX2((xCoor1 + xCoor2)/2);
+        cubicTo2.setControlX2((xCoor1 + xCoor2) / 2);
         cubicTo2.setControlY2(200);
         cubicTo2.setX(xCoor2);
         cubicTo2.setY(yCoor2);
@@ -110,7 +112,8 @@ public class MainArray extends ArrayList<ArrayNode> {
         Collections.swap(this.groupIndexMask, index1, index2);
         return prlts;
     }
-    public int  getSize(){
+
+    public int getSize() {
         return groupIndexMask.size();
-       }
+    }
 }
