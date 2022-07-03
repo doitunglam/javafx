@@ -3,18 +3,17 @@ package java_btl;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Random;
-
 import javafx.application.Application;
-import javafx.scene.Group;
 import javafx.stage.Stage;
+import javafx.scene.Group;
 
-/**
+/*
  * JavaFX App
  */
 public class App extends Application {
     
-    //Nhap mang(2) -> Xu ly mang + Sap xep Animation(2) 
     @Override 
+
     public void start(Stage stage) throws IOException {
         ArrayList<Integer> init = new ArrayList<Integer>();
         Random rand = new Random();
@@ -30,7 +29,7 @@ public class App extends Application {
         Sorting sorting = new Sorting();
         // sorting.setMainArray(init);
         // sorting.quickSort(mainScene.animationQueue,mainScene.mainArray, 0, mainArray.getSize()-1);
-        sorting.quickSort(mainScene.animationQueue,mainScene.mainArray, 0, mainArray.getSize()-1);
+        sorting.bubbleSort(mainScene.animationQueue,mainScene.mainArray);
         // mainScene.setAnimationQueue();
         // MainScene.Sorting sorting = mainScene.new Sorting();
         // sorting.bubleSort();
@@ -40,7 +39,14 @@ public class App extends Application {
         
         stage.setScene(mainScene);
         stage.setTitle("Demo Sorting");
-        stage.show();
+
+    // public void start(Stage stage) throws IOException{
+    //     WelcomeScene welcomeScene = new WelcomeScene(new Group(), 500, 200);
+    //     welcomeScene.render1();
+    //     stage.setTitle("Welcome "+ (char)34+ "you"+ (char)34+ " :)");
+    //     stage.setScene(welcomeScene);
+
+    //     stage.show();
     }
 
     public static void main(String[] args) {

@@ -1,9 +1,9 @@
 package java_btl;
 
-import java.util.ArrayList;
+//import java.util.ArrayList;
 
 import javafx.scene.Group;
-import javafx.scene.Parent;
+//import javafx.scene.Parent;
 import javafx.scene.control.TextField;
 
 public class Sorting {
@@ -12,40 +12,69 @@ public class Sorting {
     // public void setMainArray(MainArray mainArray ){
     // this.mainArray = mainArray;
     // }
+    Animation animation = new Animation();
     public Sorting(MainScene mainScene) {
      TextField textField1 = new TextField("L = ");
      TextField textField2 = new TextField("R = ");
      TextField textField3 = new TextField("Pivot = ");
      Group group = new Group(textField1,textField2,textField3);
-     mainScene = new MainScene(group, 1024 ,768 );
+     mainScene = new MainScene(group, 1024 ,500 );
     }
 
     public Sorting(){
-        
+
     }
 
     // public void setMainArray(ArrayList<Integer> src){
     // mainArray = new MainArray(src);
     // }
 
-    public void bubleSort(AnimationQueue animationQueue, MainArray mainArray) {
+    // public void bubbleSort(AnimationQueue animationQueue, MainArray mainArray) {
+    //     animationQueue.add(new Animation("Primary Indicator: A[0]", mainArray.moveIndicatorTo(mainArray.primaryIndicator, 0)));
+    //     animationQueue.add(new Animation("Secondary Indicator: A[1]", mainArray.moveIndicatorTo(mainArray.secondaryIndicator, 1)));
+    //     int swapped = 0;
+    //     do {
+    //         swapped = 0;
+    //         for (int i = 0; i < mainArray.getSize() - 1; i++) {
+    //             // if (i == 0) {
+    //             //     animationQueue.add(mainArray.primaryIndicator.makeAppear());
+    //             //     animationQueue.add(mainArray.secondaryIndicator.makeAppear());
+    //             // } else {
+    //             //     animationQueue.add(mainArray.moveIndicatorTo(mainArray.primaryIndicator, i));
+    //             //     animationQueue.add(mainArray.moveIndicatorTo(mainArray.secondaryIndicator, i + 1));
+    //             // }
+    //             if (mainArray.get(i).getKey() > mainArray.get(i + 1).getKey()) {
+    //                 animationQueue.add(new Animation("Primary Indicator: A[" + i + "]", mainArray.moveIndicatorTo(mainArray.primaryIndicator, i)));
+    //                 animationQueue.add(new Animation("Secondary Indicator: A[" + i + "]", mainArray.moveIndicatorTo(mainArray.secondaryIndicator, i + 1)));
+    //                 animationQueue.add(mainArray.primaryIndicator.makeAppear());
+    //                 animationQueue.add(mainArray.secondaryIndicator.makeAppear());
+    //                 animationQueue.add(mainArray.swap(i, i + 1));
+    //                 swapped = 1;
+    //             }
+    //         }
+    //         animationQueue.add(mainArray.primaryIndicator.makeDisappear());
+    //         animationQueue.add(mainArray.secondaryIndicator.makeDisappear());
+    //     } while (swapped == 1);
+    //     animationQueue.setCompleted(true);
+    //     //return animationQueue;
+    // }
+    public void bubbleSort(AnimationQueue animationQueue, MainArray mainArray) {
         animationQueue.add(mainArray.moveIndicatorTo(mainArray.primaryIndicator, 0));
         animationQueue.add(mainArray.moveIndicatorTo(mainArray.secondaryIndicator, 1));
         int swapped = 0;
         do {
             swapped = 0;
             for (int i = 0; i < mainArray.getSize() - 1; i++) {
-                // if (i == 0) {
-                //     animationQueue.add(mainArray.primaryIndicator.makeAppear());
-                //     animationQueue.add(mainArray.secondaryIndicator.makeAppear());
-                // } else {
-                //     animationQueue.add(mainArray.moveIndicatorTo(mainArray.primaryIndicator, i));
-                //     animationQueue.add(mainArray.moveIndicatorTo(mainArray.secondaryIndicator, i + 1));
-                // }
+                if (i == 0) {
+                    animationQueue.add(mainArray.primaryIndicator.makeAppear());
+                    animationQueue.add(mainArray.secondaryIndicator.makeAppear());
+                } else {
+                    animationQueue.add(mainArray.moveIndicatorTo(mainArray.primaryIndicator, i));
+                    animationQueue.add(mainArray.moveIndicatorTo(mainArray.secondaryIndicator, i + 1));
+                }
                 if (mainArray.get(i).getKey() > mainArray.get(i + 1).getKey()) {
                     animationQueue.add(mainArray.moveIndicatorTo(mainArray.primaryIndicator, i));
                     animationQueue.add(mainArray.moveIndicatorTo(mainArray.secondaryIndicator, i + 1));
-                    animationQueue.add(mainArray.primaryIndicator.makeAppear());
                     animationQueue.add(mainArray.secondaryIndicator.makeAppear());
                     animationQueue.add(mainArray.swap(i, i + 1));
                     swapped = 1;
@@ -55,10 +84,9 @@ public class Sorting {
             animationQueue.add(mainArray.secondaryIndicator.makeDisappear());
         } while (swapped == 1);
         animationQueue.setCompleted(true);
-        // return animationQueue;
+        //return animationQueue;
     }
-
-
+ 
 
     public void quickSort(AnimationQueue animationQueue, MainArray mainArray, int L, int R) {
         if (L < R) {
