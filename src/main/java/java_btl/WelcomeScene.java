@@ -77,7 +77,7 @@ public class WelcomeScene extends Scene {
                 sorting.quickSort(mainScene.animationQueue, mainScene.mainArray, 0, mainArray.getSize() - 1);
             } else
                 System.out.println("meo chay");
-
+            
             Stage scene2 = new Stage();
             scene2.setScene(mainScene);
             scene2.setTitle("Demo sorting");

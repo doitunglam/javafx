@@ -62,6 +62,7 @@ public class ArrayNode {
         ObservableList<Node> list = newGroup.getChildren();
         list.add(circle);
         list.add(text);
+        
         return newGroup;
     }
 }

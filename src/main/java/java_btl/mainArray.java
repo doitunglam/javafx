@@ -10,6 +10,7 @@ import javafx.scene.paint.Color;
 import javafx.scene.shape.CubicCurveTo;
 import javafx.scene.shape.MoveTo;
 import javafx.scene.shape.Path;
+import javafx.scene.text.Text;
 import javafx.util.Duration;
 
 public class MainArray extends ArrayList<ArrayNode> {
@@ -50,6 +51,7 @@ public class MainArray extends ArrayList<ArrayNode> {
         double centerY = this.windowHeight / 2;
         this.offset = 60.0;
         Group gp = new Group();
+       
         double offsetBias = this.size() / 2.0 - 0.5;
         for (int i = 0; i < this.size(); i++) {
             ArrayNode aNode = this.get(i);
