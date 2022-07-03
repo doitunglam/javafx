@@ -68,7 +68,7 @@ public class MainScene extends Scene {
         bp.setBottom(fp);
         bp.setPadding(new Insets(100));
         bp.getChildren().add(mainArray.renderedArray);
-        bp.getChildren().addAll(mainArray.primaryIndicator, mainArray.secondaryIndicator);
+        bp.getChildren().addAll(mainArray.primaryIndicator, mainArray.secondaryIndicator,mainArray.pivotIndicator);
      
         this.setRoot(bp);
     }
