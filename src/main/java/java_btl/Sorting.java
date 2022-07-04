@@ -98,6 +98,4 @@ public class Sorting {
         animationQueue.add(mainArray.swap(storeIndex, R));
         return storeIndex;
     }
-
- 
 }

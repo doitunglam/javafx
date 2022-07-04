@@ -71,6 +71,27 @@ public class MainScene extends Scene {
         this.setRoot(bp);
     }
 
+    public void setAnimationQueue(int n) {
+        animationQueue.add(mainArray.moveIndicatorTo(mainArray.primaryIndicator, 0));
+        for (int i = 0; i < n-1; i++) {
+            if (i == 0)
+                animationQueue.add(mainArray.primaryIndicator.makeAppear());
+            else
+                animationQueue.add(mainArray.moveIndicatorTo(mainArray.primaryIndicator, i));
+            animationQueue.add(mainArray.moveIndicatorTo(mainArray.secondaryIndicator, i + 1));
+            for (int j = i + 1; j < n; j++) {
+                if (j == i + 1)
+                    animationQueue.add(mainArray.secondaryIndicator.makeAppear());
+                else
+                    animationQueue.add(mainArray.moveIndicatorTo(mainArray.secondaryIndicator, j));
+                if (mainArray.get(i).getKey() < mainArray.get(j).getKey())
+                    animationQueue.add(mainArray.swap(i, j));
+            }
+            animationQueue.add(mainArray.secondaryIndicator.makeDisappear());
+        }
+        animationQueue.add(mainArray.primaryIndicator.makeDisappear());
+        animationQueue.setCompleted(true);
+    }
     public void setAnimationQueue(AnimationQueue animationQueue){
         this.animationQueue = animationQueue;
     }

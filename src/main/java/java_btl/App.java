@@ -14,7 +14,7 @@ public class App extends Application {
     
     @Override 
     public void start(Stage stage) throws IOException{
-        WelcomeScene welcomeScene = new WelcomeScene(new Group(), 500, 200);
+        WelcomeScene welcomeScene = new WelcomeScene(new Group(), 700, 300);
         welcomeScene.render1();
         stage.setTitle("Welcome "+ (char)34+ "you"+ (char)34+ " :)");
         stage.setScene(welcomeScene);
