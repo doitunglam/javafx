@@ -72,9 +72,9 @@ public class WelcomeScene extends Scene {
             Sorting sorting = new Sorting();
             String option = choiceBox.getValue().toString();
             if (option.compareTo("Bubble sort") == 0) {
-                sorting.bubbleSort(mainScene.animationQueue, mainScene.mainArray);
+                sorting.bubbleSort(mainScene.animationQueue, MainScene.mainArray);
             } else if (option.compareTo("Quick sort") == 0) {
-                sorting.quickSort(mainScene.animationQueue, mainScene.mainArray, 0, mainArray.getSize() - 1);
+                sorting.quickSort(mainScene.animationQueue, MainScene.mainArray, 0, mainArray.getSize() - 1);
             } else
                 System.out.println("meo chay");
             

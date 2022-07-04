@@ -51,7 +51,8 @@ public class AnimationQueue extends LinkedList<Animation> {
             currentTransistion.setOnFinished(Event -> {
                 playQueue();
             });
-            
+            if(!currentAnimation.getMessage().isEmpty())
+            MainScene.textIndicator.appendText(currentAnimation.getMessage() +"\n");
             currentTransistion.play();
         }
     }
