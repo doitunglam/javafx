@@ -7,13 +7,13 @@ import javafx.animation.ParallelTransition;
 import javafx.animation.PauseTransition;
 import javafx.util.Duration;
 
-public class AnimationQueue extends  LinkedList<ParallelTransition> {
+public class AnimationQueue extends LinkedList<Animation> {
     private boolean isCompleted;
     private int waitCount;
     private Semaphore isInterruped;
 
     public AnimationQueue() {
-        // super();
+        super();
         isCompleted = false;
         waitCount = 0;
         isInterruped = new Semaphore(0);
@@ -46,11 +46,13 @@ public class AnimationQueue extends  LinkedList<ParallelTransition> {
             }
         }
         if (this.isEmpty() == false) {
-            ParallelTransition currentAnimationNode = this.pop();
-            currentAnimationNode.setOnFinished(Event -> {
+            Animation currentAnimation = this.pop();
+           ParallelTransition currentTransistion = currentAnimation.getAnimation();
+            currentTransistion.setOnFinished(Event -> {
                 playQueue();
             });
-            currentAnimationNode.play();
+            
+            currentTransistion.play();
         }
     }
 
@@ -62,12 +64,8 @@ public class AnimationQueue extends  LinkedList<ParallelTransition> {
         }
     }
 
-    public void resetInteruputed(){
+    public void resetInteruputed() {
         this.isInterruped.release();
         playQueue();
     }
-
-    // public void add(Animation animation) {
-    //     this.add(animation.getAnimation());
-    // }
 }

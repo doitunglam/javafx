@@ -7,23 +7,12 @@ import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.FlowPane;
+import javafx.scene.text.Text;
 
 public class MainScene extends Scene {
 
-
-
-    // public static MainArray mainArray;
-    // public AnimationQueue animationQueue;
-    
-
-    // // private MainArray mainArray;
-    // // private AnimationQueue animationQueue;
-    // public TextArea textIndicator = new TextArea(); 
-
-
     public static MainArray mainArray;
     public AnimationQueue animationQueue;
-
 
     public MainScene(Parent arg0, double arg1, double arg2) {
         super(arg0, arg1, arg2);
@@ -79,31 +68,11 @@ public class MainScene extends Scene {
         bp.setBottom(fp);
         bp.setPadding(new Insets(100));
         bp.getChildren().add(mainArray.renderedArray);
-        bp.getChildren().addAll(mainArray.primaryIndicator, mainArray.secondaryIndicator);
+        bp.getChildren().addAll(mainArray.primaryIndicator, mainArray.secondaryIndicator,mainArray.pivotIndicator);
+     
         this.setRoot(bp);
     }
 
-    public void setAnimationQueue(int n) {
-        animationQueue.add(mainArray.moveIndicatorTo(mainArray.primaryIndicator, 0));
-        for (int i = 0; i < n-1; i++) {
-            if (i == 0)
-                animationQueue.add(mainArray.primaryIndicator.makeAppear());
-            else
-                animationQueue.add(mainArray.moveIndicatorTo(mainArray.primaryIndicator, i));
-            animationQueue.add(mainArray.moveIndicatorTo(mainArray.secondaryIndicator, i + 1));
-            for (int j = i + 1; j < n; j++) {
-                if (j == i + 1)
-                    animationQueue.add(mainArray.secondaryIndicator.makeAppear());
-                else
-                    animationQueue.add(mainArray.moveIndicatorTo(mainArray.secondaryIndicator, j));
-                if (mainArray.get(i).getKey() < mainArray.get(j).getKey())
-                    animationQueue.add(mainArray.swap(i, j));
-            }
-            animationQueue.add(mainArray.secondaryIndicator.makeDisappear());
-        }
-        animationQueue.add(mainArray.primaryIndicator.makeDisappear());
-        animationQueue.setCompleted(true);
-    }
     public void setAnimationQueue(AnimationQueue animationQueue){
         this.animationQueue = animationQueue;
     }

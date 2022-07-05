@@ -49,7 +49,7 @@ public class Indicator extends Polygon {
         ts.setByX(xCoor - this.xCoor);
         ts.setByY(yCoor - this.yCoor);
         ts.setAutoReverse(false);
-        ts.setDuration(Duration.millis(300));
+        ts.setDuration(Duration.millis(100));
         ts.setCycleCount(1);
         ts.setNode(this);
         this.xCoor = xCoor;
