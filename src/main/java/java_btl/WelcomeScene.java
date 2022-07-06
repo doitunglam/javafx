@@ -3,6 +3,8 @@ package java_btl;
 import java.util.ArrayList;
 import java.util.Random;
 
+
+
 //import com.example.Method;
 
 // import javafx.application.Application;
@@ -53,10 +55,10 @@ public class WelcomeScene extends Scene {
         Label labelSelect = new Label("Select the method:");
         root.add(labelSelect, 0, 3);
 
-        Method bubblesort = new Method("Bubble sort");
-        Method quicksort = new Method("Quick sort");
-        Method heapsort = new Method("Heap sort");
-        Method radixsort = new Method("Radix sort");
+        Method bubblesort = new Method("Bubble Sort");
+        Method quicksort = new Method("Quick Sort");
+        Method heapsort = new Method("Heap Sort");
+        Method radixsort = new Method("Radix Sort");
         ObservableList<Method> argorithms //
                 = FXCollections.observableArrayList(bubblesort, quicksort, heapsort, radixsort);
         ChoiceBox<Method> choiceBox = new ChoiceBox<Method>(argorithms);
@@ -101,12 +103,16 @@ public class WelcomeScene extends Scene {
 
             Sorting sorting = new Sorting();
             String option = choiceBox.getValue().toString();
-            if (option.compareTo("Bubble sort") == 0) {
+            if (option.compareTo("Bubble Sort") == 0) {
                 sorting.bubbleSort(mainScene.animationQueue, MainScene.mainArray);
-            } else if (option.compareTo("Quick sort") == 0) {
+            } else if (option.compareTo("Quick Sort") == 0) {
                 sorting.quickSort(mainScene.animationQueue, MainScene.mainArray, 0, mainArray.getSize() - 1);
-            } else
-                System.out.println("MEO CHAY");
+            } else if(option.compareTo("Heap Sort") == 0){
+                sorting.heapsort(mainScene.animationQueue,mainScene.mainArray);
+            } else if(option.compareTo("Radix Sort") == 0){
+                sorting.RadixSort(mainScene.animationQueue, mainScene.mainArray);
+            }
+                System.out.println("Initialization failed!");
 
             Stage scene2 = new Stage();
             scene2.setScene(mainScene);

@@ -49,7 +49,7 @@ public class Indicator extends Polygon {
         ts.setByX(xCoor - this.xCoor);
         ts.setByY(yCoor - this.yCoor);
         ts.setAutoReverse(false);
-        ts.setDuration(Duration.millis(100));
+        ts.setDuration(Duration.millis(50));
         ts.setCycleCount(1);
         ts.setNode(this);
         this.xCoor = xCoor;
@@ -67,7 +67,7 @@ public class Indicator extends Polygon {
             this.setVisible(true);
         });
         PauseTransition ps = new PauseTransition();
-        ps.setDuration(Duration.millis(400));
+        ps.setDuration(Duration.millis(50));
         sq.getChildren().add(ts);
         sq.getChildren().add(ps);
         return new ParallelTransition(sq);
