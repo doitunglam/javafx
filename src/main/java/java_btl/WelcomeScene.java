@@ -18,6 +18,7 @@ import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
 import javafx.scene.control.Label;
+import javafx.scene.control.RadioButton;
 import javafx.scene.layout.GridPane;
 import javafx.scene.Group;
 
@@ -46,10 +47,10 @@ public class WelcomeScene extends Scene {
         GridPane.setHalignment(enterArray, HPos.RIGHT);
         root.add(enterArray, 3, 1);
 
-        Label labelTitle1 = new Label("Or random:");
+        Label labelTitle1 = new Label("Random:");
         root.add(labelTitle1, 5, 0);
 
-        Button random = new Button("Random Array");
+        RadioButton random = new RadioButton();
         root.add(random, 6, 0);
 
         Label labelSelect = new Label("Select the method:");
@@ -76,6 +77,7 @@ public class WelcomeScene extends Scene {
         enterArray.setOnMouseClicked(e -> {
             a = 0;
         });
+
         random.setOnMouseClicked(e -> {
             Random rd = new Random();
             init.clear();
