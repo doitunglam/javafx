@@ -27,7 +27,9 @@ public class WelcomeScene extends Scene {
     public WelcomeScene(Parent arg0, double arg1, double arg2) {
         super(arg0, arg1, arg2);
     }
+
     int a = 0;
+
     public void render1() {
         GridPane root = new GridPane();
         root.setPadding(new Insets(20));
@@ -42,7 +44,7 @@ public class WelcomeScene extends Scene {
 
         Button enterArray = new Button("Enter Array");
         GridPane.setHalignment(enterArray, HPos.RIGHT);
-        root.add(enterArray,3,1);
+        root.add(enterArray, 3, 1);
 
         Label labelTitle1 = new Label("Or random:");
         root.add(labelTitle1, 5, 0);
@@ -70,17 +72,17 @@ public class WelcomeScene extends Scene {
         start.setPrefSize(75, 40);
 
         ArrayList<Integer> init = new ArrayList<Integer>();
-        
-        enterArray.setOnMouseClicked(e ->{
-            a=0;
+
+        enterArray.setOnMouseClicked(e -> {
+            a = 0;
         });
         random.setOnMouseClicked(e -> {
             Random rd = new Random();
             init.clear();
             for (int i = 0; i <= 10; i++) {
-                init.add(i,rd.nextInt(100));
+                init.add(i, rd.nextInt(100));
             }
-            a =1;
+            a = 1;
 
         });
 
@@ -105,8 +107,11 @@ public class WelcomeScene extends Scene {
                 sorting.bubbleSort(mainScene.animationQueue, MainScene.mainArray);
             } else if (option.compareTo("Quick sort") == 0) {
                 sorting.quickSort(mainScene.animationQueue, MainScene.mainArray, 0, mainArray.getSize() - 1);
-            } else
-                System.out.println("MEO CHAY");
+            } else if (option.compareTo("Radix sort") == 0) {
+                sorting.RadixSort(mainScene.animationQueue, MainScene.mainArray);
+            } else if (option.compareTo("Heap sort") == 0) {
+                sorting.heapsort(mainScene.animationQueue, MainScene.mainArray);
+            }
 
             Stage scene2 = new Stage();
             scene2.setScene(mainScene);
